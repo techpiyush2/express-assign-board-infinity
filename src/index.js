@@ -1,15 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const route = require('./routes/route.js');
+const dotenv = require('dotenv');
 const { default: mongoose } = require('mongoose');
 const app = express();
 const PORT = process.env.PORT || 3000 ;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+dotenv.config()
 
+const DB_URL = process.env.DB_URL
 
-mongoose.connect("mongodb+srv://piyush:piyush123@piyush.sl7krrs.mongodb.net/promise?retryWrites=true&w=majority", {
+mongoose.connect(DB_URL, {
     useNewUrlParser: true
 })
 .then( () => console.log("MongoDb connected"))
